@@ -123,7 +123,7 @@ Alert alert = new Alert(Alert.AlertType.NONE);
             }                
         } catch (NumberFormatException ex){
             if (batValueSit1Series.getText().isEmpty()){
-                labelBatSit1Series.setText(labelBatSit1Series.getId());
+                labelBatSit1Series.setText("VOLTAGE");
             }else{
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setHeaderText("ERROR");
@@ -889,7 +889,7 @@ Alert alert = new Alert(Alert.AlertType.NONE);
 
     // PROVIDE OUTPUTS AND EXPLANATIONS
     
-    // SITUATION 1 
+    // SITUATION 1 SERIES 
     static boolean boolVoltSit1 = false;
     static boolean boolResSit1 = false;
     static boolean boolCurSit1 = false;
@@ -966,7 +966,9 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 + "The current of the circuit is: " + resSeries1.getCurrent()+" A\n\n"
                 + "By applying Ohm's law (V = IR) we get: " + "\n" 
                 + "Voltage = " + resSeries1.getCurrent() + "*" + resSeries1.getResistance() + " V\n"
-                + "Voltage = " + resSeries1.getVoltage() + " V");  
+                + "Voltage = " + resSeries1.getVoltage() + " V"); 
+                        
+            stage.setTitle("Calculate Voltage");
         }
         else if (boolResSit1){
             steps.setText(
@@ -975,6 +977,8 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 + "By applying Ohm's law (V = IR so R = V/I) we get: " + "\n" 
                 + "Resistance = " + batSeries1.getVoltage() + "/" + resSeries1.getCurrent() + " Ohms\n"
                 + "Resistance = " + resSeries1.getResistance() + " Ohms");  
+            
+            stage.setTitle("Calculate Resistance");
         }
         else if (boolCurSit1){
             steps.setText(
@@ -983,17 +987,191 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 + "By applying Ohm's law (V = IR so I = V/R) we get: " + "\n" 
                 + "Current = " + resSeries1.getVoltage() + "*" + resSeries1.getResistance() + " A\n"
                 + "Current = " + resSeries1.getCurrent() + " A");  
+            
+            stage.setTitle("Calculate Current");
         }
         Scene scene = new Scene(layout, 520, 400);  
-        stage.setTitle("Info");
         stage.setScene(scene);
         stage.show();
     }
-        /*
-    labelBatSit1Series, labelResSit1Series, labelCurSit1Series;
+    
+    
+    // SITUATION 1 PARALLEL 
+    public void handleCalculateSit1Parallel(){
+        
+        //if no input
+        if (    batValueSit1Parallel.getText().isEmpty() 
+                && current2Sit1Parallel.getText().isEmpty() 
+                && current1Sit1Parallel.getText().isEmpty() 
+                && resistance1Sit1Parallel.getText().isEmpty()
+                && resistance2Sit1Parallel.getText().isEmpty()){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
+            alert.showAndWait();
+       }
+        
+       //if 4 empty sauf 2 resistance et 2 currents       
+       else if ((batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty())||
+               (batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) || 
+               (batValueSit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()&& current1Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()&&current2Sit1Parallel.getText().isEmpty())){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
+            alert.showAndWait();  
+       }
+       
+       //if 3 empty
+       else if ((batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
+               (current1Sit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (current2Sit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (current1Sit1Parallel.getText().isEmpty()&& current2Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (current2Sit1Parallel.getText().isEmpty()&& current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty())){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
+            alert.showAndWait();
+       }
+       
+       //if 2 empty
+       else if ((batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty())||
+               (batValueSit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
+               (resistance1Sit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty()) ||
+               (current1Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()) ||
+               (current2Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()))
+               {
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
+            alert.showAndWait();
+       }
+       
+       //if battery and current missing
+       else if (batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty()){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter an input for Battery Voltage or Currents for Resistors 1 and 2");
+            alert.showAndWait();
+       }
+              
+       //if battery and resistors missing
+       else if (batValueSit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()
+               && resistance2Sit1Parallel.getText().isEmpty()){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter an input for Battery Voltage or Resistances 1 and 2");
+            alert.showAndWait();           
+       }
+       
+       //if current and resistors missing       
+       else if (resistance1Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()&& current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty()){           
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter an input for Currents for Resistors 1 and 2 or Resistances 1 and 2");
+            alert.showAndWait();       
+        }
+        
+    }
+    
+    // SITUATION 1 PARALLEL 
+    public void handleCalculateSit1Series(){
+        
+        //if no input
+        if (    batValueSit2Series.getText().isEmpty() 
+                && voltage1Sit2Series.getText().isEmpty() 
+                && voltage2Sit2Series.getText().isEmpty() 
+                && resistance1Sit2Series.getText().isEmpty()
+                && resistance2Sit2Series.getText().isEmpty()
+                && currentSit2Series.getText().isEmpty()){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
+            alert.showAndWait();
+       }
+        
+       //if 4 empty        
+       else if ((batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty())||
+               (batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) || 
+               (batValueSit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()&& current1Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()&&current2Sit1Parallel.getText().isEmpty())){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
+            alert.showAndWait();  
+       }
+       
+    /*
+batValueSit2Series, resistance1Sit2Series, resistance2Sit2Series, voltage1Sit2Series, voltage2Sit2Series, currentSit2Series;
     */
-   /*batValueSit1Series, resistanceSit1Series, currentSit1Series;*/
-   
+       
+       //if 3 empty
+       else if ((batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
+               (current1Sit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (current2Sit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (current1Sit1Parallel.getText().isEmpty()&& current2Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (current2Sit1Parallel.getText().isEmpty()&& current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty())){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
+            alert.showAndWait();
+       }
+       
+       //if 2 empty
+       else if ((batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty())||
+               (batValueSit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
+               (batValueSit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
+               (current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
+               (resistance1Sit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty()) ||
+               (current1Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()) ||
+               (current2Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()))
+               {
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
+            alert.showAndWait();
+       }
+       
+       //if battery and current missing
+       else if (batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty()){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter an input for Battery Voltage or Currents for Resistors 1 and 2");
+            alert.showAndWait();
+       }
+              
+       //if battery and resistors missing
+       else if (batValueSit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()
+               && resistance2Sit1Parallel.getText().isEmpty()){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter an input for Battery Voltage or Resistances 1 and 2");
+            alert.showAndWait();           
+       }
+       
+       //if current and resistors missing       
+       else if (resistance1Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()&& current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty()){           
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter an input for Currents for Resistors 1 and 2 or Resistances 1 and 2");
+            alert.showAndWait();       
+        }
+        
+    }
+    /*
+batValueSit2Series, resistance1Sit2Series, resistance2Sit2Series, voltage1Sit2Series, voltage2Sit2Series, currentSit2Series;
+    */
+    
     public void Info(){
         /*Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
