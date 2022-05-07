@@ -18,11 +18,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
 public class Controller implements Initializable {
-String path = "file:///";
+String path = "file:///C:/Users/paulk/OneDrive/Documents/NetBeansProjects/Circuit/Resources/Circuit/";
 
 @FXML Button GoMenu, GoSeries1, GoSeries2, GoSeries3, GoParallel1,GoParallel2;
 
@@ -38,7 +42,7 @@ String path = "file:///";
 @FXML TextField batValueSit1Parallel, resistance1Sit1Parallel,resistance2Sit1Parallel, current1Sit1Parallel, current2Sit1Parallel;
 @FXML TextField batValueSit2Parallel, resistance1Sit2Parallel,resistance2Sit2Parallel,resistance3Sit2Parallel, current1Sit2Parallel, current2Sit2Parallel, current3Sit2Parallel;
 
-@FXML Label labelBatSit1Series, labelResSit1Series, labelCurSit1Series;
+@FXML Label labelBatSit1Series, labelResSit1Series, labelCurSit1Series, labelVoltSit1Series;
 @FXML Label labelBatSit2Series, labelRes1Sit2Series, labelRes2Sit2Series, labelVolt1Sit2Series, labelVolt2Sit2Series, labelCurSit2Series;
 @FXML Label labelBatSit3Series, labelRes1Sit3Series, labelRes2Sit3Series, labelRes3Sit3Series, labelVolt1Sit3Series, labelVolt2Sit3Series, labelVolt3Sit3Series, labelCurSit3Series;
 @FXML Label labelBatSit1Parallel, labelRes1Sit1Parallel, labelRes2Sit1Parallel, labelCur1Sit1Parallel, labelCur2Sit1Parallel;
@@ -111,20 +115,29 @@ Alert alert = new Alert(Alert.AlertType.NONE);
         try{
             double voltage = Double.parseDouble(batValueSit1Series.getText());
             batSeries1.setVoltage(voltage);
+            resSeries1.setVoltage(voltage);
             labelBatSit1Series.setText(batSeries1.getVoltage()+" V");
+            labelVoltSit1Series.setText(batSeries1.getVoltage()+" V");
             if (voltage <= 0) {
                 throw new IllegalArgumentException(); 
-            }   
+            }                
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as voltage value !");
-            alert.showAndWait();
+            if (batValueSit1Series.getText().isEmpty()){
+                labelBatSit1Series.setText(labelBatSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as voltage value !");
+                alert.showAndWait();
+            }
         } catch (IllegalArgumentException ex){
+            
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setHeaderText("ERROR");
             alert.setContentText("Please enter a positive number higher than 0 as voltage value !");
             alert.showAndWait();
+            
+            
         }
     }
 
@@ -137,11 +150,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as resistance value !");
-            alert.showAndWait();
-
+            if (resistanceSit1Series.getText().isEmpty()){
+                labelResSit1Series.setText(labelResSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as resistance value !");
+                alert.showAndWait();
+            }
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setHeaderText("ERROR");
@@ -159,10 +175,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -178,7 +198,7 @@ Alert alert = new Alert(Alert.AlertType.NONE);
     Resistor res1Series2 = new Resistor();
     Resistor res2Series2 = new Resistor();
 
-    public void setBatValueSit2Series() {
+    public void setBatValueSit2Series() { ////////////////////////////////////////////////
         try{
             double voltage = Double.parseDouble(batValueSit2Series.getText());
             batSeries2.setVoltage(voltage);
@@ -187,10 +207,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as voltage value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setHeaderText("ERROR");
@@ -208,10 +232,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as resistance value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -230,10 +258,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as resistance value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -251,10 +283,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -272,10 +308,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -295,10 +335,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -327,10 +371,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as voltage value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setHeaderText("ERROR");
@@ -348,10 +396,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
 }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as resistance value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -370,10 +422,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as resistance value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -392,10 +448,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as resistance value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -413,10 +473,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -435,10 +499,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -457,10 +525,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -481,10 +553,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -509,10 +585,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as voltage value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setHeaderText("ERROR");
@@ -530,10 +610,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as resistance value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -552,10 +636,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as resistance value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -573,10 +661,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -594,10 +686,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -623,10 +719,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as voltage value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setHeaderText("ERROR");
@@ -644,11 +744,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as resistance value !");
-            alert.showAndWait();
-
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setHeaderText("ERROR");
@@ -666,10 +769,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as resistance value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -687,10 +794,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as resistance value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -708,10 +819,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -729,10 +844,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -750,10 +869,14 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter a number as current value !");
-            alert.showAndWait();
+            if (currentSit1Series.getText().isEmpty()){
+                labelCurSit1Series.setText(labelCurSit1Series.getId()); ///////// change labels and text fields
+            }else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter a number as current value !");
+                alert.showAndWait();
+            }
 
         } catch (IllegalArgumentException ex){
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -766,22 +889,110 @@ Alert alert = new Alert(Alert.AlertType.NONE);
 
     // PROVIDE OUTPUTS AND EXPLANATIONS
     
-        //
+    // SITUATION 1 
+    static boolean boolVoltSit1 = false;
+    static boolean boolResSit1 = false;
+    static boolean boolCurSit1 = false;
+    
+    public void handleCalculateSit1(){   
         
+        // No input at all
+        if (batValueSit1Series.getText().isEmpty() && resistanceSit1Series.getText().isEmpty() && currentSit1Series.getText().isEmpty()){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter an input for 2 categories (Voltage, Resistance, Current)");
+            alert.showAndWait();
+        }
         
+        // No input for voltage and resistance
+        else if (batValueSit1Series.getText().isEmpty() && resistanceSit1Series.getText().isEmpty()){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter an input for Voltage or for Resistance");
+            alert.showAndWait();
+        }
         
-    public void ReqResult(){
+        // No input for resistance and current
+        else if (resistanceSit1Series.getText().isEmpty() && currentSit1Series.getText().isEmpty()){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter an input for Current or for Resistance");
+            alert.showAndWait();
+        }
+        
+        // No input for current and voltage
+        else if (currentSit1Series.getText().isEmpty() && batValueSit1Series.getText().isEmpty()){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter an input for Voltage or for Current");
+            alert.showAndWait();
+        }
+        
+        else{
+            // V = IR
+            if (batValueSit1Series.getText().isEmpty()){
+                resSeries1.setVoltage(resSeries1.getCurrent()*resSeries1.getResistance());
+                labelBatSit1Series.setText(String.format("%.3f", resSeries1.getVoltage())+" V");
+                labelVoltSit1Series.setText(String.format("%.3f", resSeries1.getVoltage())+" V");
+                boolVoltSit1 = true;
+            }
+            
+            // R = V/I
+            else if (resistanceSit1Series.getText().isEmpty()){
+                resSeries1.setResistance(resSeries1.getVoltage()/resSeries1.getCurrent());
+                labelResSit1Series.setText(String.format("%.3f", resSeries1.getResistance())+" Ohm");
+                boolResSit1 = true;
+            }
+            
+            // I = V/R
+            else if (currentSit1Series.getText().isEmpty()){
+                resSeries1.setCurrent(resSeries1.getVoltage()/resSeries1.getResistance());
+                labelCurSit1Series.setText(String.format("%.3f", resSeries1.getCurrent())+" A");
+                boolCurSit1 = true;
+            }
+        }
+    }
     
-}
-    public void CurrentResult(){
-    
-}
-    public void VoltageResult(){
-    
-}
-    
-
-    
+    public void handleStepsSit1(){
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        GridPane layout = new GridPane();        
+        Label steps = new Label();
+        steps.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        layout.add(steps, 0,0);
+        if (boolVoltSit1){
+            steps.setText(
+                "The resistance value of the resistor is:  " + resSeries1.getResistance() + " Ohm\n"
+                + "The current of the circuit is: " + resSeries1.getCurrent()+" A\n\n"
+                + "By applying Ohm's law (V = IR) we get: " + "\n" 
+                + "Voltage = " + resSeries1.getCurrent() + "*" + resSeries1.getResistance() + " V\n"
+                + "Voltage = " + resSeries1.getVoltage() + " V");  
+        }
+        else if (boolResSit1){
+            steps.setText(
+                "The voltage of the battery is:  " + batSeries1.getVoltage() + " V\n"
+                + "The current of the circuit is: " + resSeries1.getCurrent()+" A\n\n"
+                + "By applying Ohm's law (V = IR so R = V/I) we get: " + "\n" 
+                + "Resistance = " + batSeries1.getVoltage() + "/" + resSeries1.getCurrent() + " Ohms\n"
+                + "Resistance = " + resSeries1.getResistance() + " Ohms");  
+        }
+        else if (boolCurSit1){
+            steps.setText(
+                "The voltage of the battery is :  " + batSeries1.getVoltage() + " V\n"
+                + "The resistance value of the resistor is:  " + resSeries1.getResistance() + " Ohm\n\n"
+                + "By applying Ohm's law (V = IR so I = V/R) we get: " + "\n" 
+                + "Current = " + resSeries1.getVoltage() + "*" + resSeries1.getResistance() + " A\n"
+                + "Current = " + resSeries1.getCurrent() + " A");  
+        }
+        Scene scene = new Scene(layout, 520, 400);  
+        stage.setTitle("Info");
+        stage.setScene(scene);
+        stage.show();
+    }
+        /*
+    labelBatSit1Series, labelResSit1Series, labelCurSit1Series;
+    */
+   /*batValueSit1Series, resistanceSit1Series, currentSit1Series;*/
    
     public void Info(){
         /*Stage stage = new Stage();
