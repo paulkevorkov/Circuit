@@ -32,7 +32,7 @@
                      </font>
                   </Button>
                   <Button layoutX="32.0" layoutY="361.0" mnemonicParsing="false" text="Need Help?" />
-                  <TextField fx:id="currentSit1Series1" layoutX="8.0" layoutY="136.0" prefHeight="15.0" prefWidth="76.0" />
+                  <TextField fx:id="currentSit1Series" layoutX="8.0" layoutY="136.0" prefHeight="15.0" prefWidth="76.0" />
                   <Button fx:id="SetCurrentSit1Series1" layoutX="80.0" layoutY="136.0" mnemonicParsing="false" onAction="#setCur1ValueSit1Series" prefHeight="25.0" prefWidth="31.0" text="✅" textFill="#00ff15">
                      <font>
                         <Font name="Mongolian Baiti" size="12.0" />
@@ -86,12 +86,12 @@
                         <Image url="@../../../InteractiveCircuitBuilder/Resources/wire%20image.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="labelVoltageSituation1" layoutX="303.0" layoutY="86.0" text="VOLTAGE">
+                  <Label fx:id="labelBatSit1Series" layoutX="303.0" layoutY="86.0" text="VOLTAGE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelResSituation2" layoutX="288.0" layoutY="258.0" text="RESISTANCE">
+                  <Label fx:id="labelResSit1Series" layoutX="288.0" layoutY="258.0" text="RESISTANCE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -131,7 +131,7 @@
                         <Image url="@../../../InteractiveCircuitBuilder/Resources/wire%20image.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="labelAmpSituaion1" layoutX="302.0" layoutY="350.0" text="CURRENT">
+                  <Label fx:id="labelCurSit1Series" layoutX="302.0" layoutY="350.0" text="CURRENT">
                      <font>
                         <Font size="20.0" />
                      </font>
