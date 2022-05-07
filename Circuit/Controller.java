@@ -6,16 +6,12 @@
 package Circuit;
 
 
-import Circuit.Battery;
-import Circuit.Resistor;
 import java.io.IOException;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -26,25 +22,25 @@ import javafx.stage.Stage;
 
 
 public class Controller implements Initializable {
-String path = "file:///C:/Users/paulk/OneDrive/Documents/NetBeansProjects/Circuit/Resources/Circuit/";
+String path = "file:///";
 
 @FXML Button GoMenu, GoSeries1, GoSeries2, GoSeries3, GoParallel1,GoParallel2;
 
-@FXML Button SetBatSit1Series, SetResSit1Series, SetCurrentSit1Series1;
-@FXML Button SetBatSit2Series, SetRes1Sit2Series, SetRes2Sit2Series, SetCur1Sit2Series, SetCur2Sit2Series;
-@FXML Button SetBatSit3Series, SetRes1Sit3Series, SetRes2Sit3Series, SetRes3Sit3Series, SetCur1Sit3Series, SetCur2Sit3Series, SetCur3Sit3Series;
+@FXML Button SetBatSit1Series, SetResSit1Series, SetCurrentSit1Series;
+@FXML Button SetBatSit2Series, SetRes1Sit2Series, SetRes2Sit2Series, SetVolt1Sit2Series, SetVolt2Sit2Series, SetCurSit2Series;
+@FXML Button SetBatSit3Series, SetRes1Sit3Series, SetRes2Sit3Series, SetRes3Sit3Series, SetVolt1Sit3Series, SetVolt2Sit3Series, SetVolt3Sit3Series;
 @FXML Button SetBatSit1Parallel, SetRes1Sit1Parallel, SetRes2Sit1Parallel, SetCur1Sit1Parallel,SetCur2Sit1Parallel;
 @FXML Button SetBatSit2Parallel, SetRes1Sit2Parallel, SetRes2Sit2Parallel, SetRes3Sit2Parallel,SetCur1Sit2Parallel, SetCur2Sit2Parallel, SetCur3Sit2Parallel;
 
-@FXML TextField batValueSit1Series, resistanceSit1Series, currentSit1Series1;
-@FXML TextField batValueSit2Series, resistance1Sit2Series, resistance2Sit2Series1, current1Sit2Series, current2Sit2Series;
-@FXML TextField batValueSit3Series, resistance1Sit3Series, resistance2Sit3Series, resistance3Sit3Series, current1Sit3Series, current2Sit3Series, current3Sit3Series;
+@FXML TextField batValueSit1Series, resistanceSit1Series, currentSit1Series;
+@FXML TextField batValueSit2Series, resistance1Sit2Series, resistance2Sit2Series, voltage1Sit2Series, voltage2Sit2Series, currentSit2Series;
+@FXML TextField batValueSit3Series, resistance1Sit3Series, resistance2Sit3Series, resistance3Sit3Series, voltage1Sit3Series, voltage2Sit3Series, voltage3Sit3Series, currentSit3Series;
 @FXML TextField batValueSit1Parallel, resistance1Sit1Parallel,resistance2Sit1Parallel, current1Sit1Parallel, current2Sit1Parallel;
 @FXML TextField batValueSit2Parallel, resistance1Sit2Parallel,resistance2Sit2Parallel,resistance3Sit2Parallel, current1Sit2Parallel, current2Sit2Parallel, current3Sit2Parallel;
 
 @FXML Label labelBatSit1Series, labelResSit1Series, labelCurSit1Series;
-@FXML Label labelBatSit2Series, labelRes1Sit2Series, labelRes2Sit2Series, labelCur1Sit2Series, labelCur2Sit2Series;
-@FXML Label labelBatSit3Series, labelRes1Sit3Series, labelRes2Sit3Series, labelRes3Sit3Series, labelCur1Sit3Series, labelCur2Sit3Series, labelCur3Sit3Series;
+@FXML Label labelBatSit2Series, labelRes1Sit2Series, labelRes2Sit2Series, labelVolt1Sit2Series, labelVolt2Sit2Series, labelCurSit2Series;
+@FXML Label labelBatSit3Series, labelRes1Sit3Series, labelRes2Sit3Series, labelRes3Sit3Series, labelVolt1Sit3Series, labelVolt2Sit3Series, labelVolt3Sit3Series, labelCurSit3Series;
 @FXML Label labelBatSit1Parallel, labelRes1Sit1Parallel, labelRes2Sit1Parallel, labelCur1Sit1Parallel, labelCur2Sit1Parallel;
 @FXML Label labelBatSit2Parallel, labelRes1Sit2Parallel, labelRes2Sit2Parallel, labelRes3Sit2Parallel, labelCur1Sit2Parallel, labelCur2Sit2Parallel, labelCur3Sit2Parallel;
 
@@ -136,7 +132,7 @@ Alert alert = new Alert(Alert.AlertType.NONE);
         try{
             double resist1 = Double.parseDouble(resistanceSit1Series.getText());
             resSeries1.setResistance(resist1);
-            labelResSit1Series.setText(resSeries1.getResistance() + "Ohm");
+            labelResSit1Series.setText(resSeries1.getResistance() + " Ohm");
             if (resist1 < 0) {
                 throw new IllegalArgumentException(); 
             }   
@@ -156,9 +152,9 @@ Alert alert = new Alert(Alert.AlertType.NONE);
 
     public void setCur1ValueSit1Series() {
         try{
-            double current1 = Double.parseDouble(currentSit1Series1.getText());
+            double current1 = Double.parseDouble(currentSit1Series.getText());
             resSeries1.setCurrent(current1);
-            labelCurSit1Series.setText(resSeries1.getCurrent()+" A");
+            labelCurSit1Series.setText(currentSit1Series.getText()+" A");
             if (current1 < 0) {
                 throw new IllegalArgumentException(); 
             }   
@@ -227,7 +223,7 @@ Alert alert = new Alert(Alert.AlertType.NONE);
 
     public void setRes2ValueSit2Series() {
         try{
-            double resist1 = Double.parseDouble(resistance2Sit2Series1.getText());
+            double resist1 = Double.parseDouble(resistance2Sit2Series.getText());
             res2Series2.setResistance(resist1);
             labelRes2Sit2Series.setText(res2Series2.getResistance()+"Ohm");
             if (resist1 < 0) {
@@ -246,12 +242,12 @@ Alert alert = new Alert(Alert.AlertType.NONE);
             alert.showAndWait();
         }
     }
-    public void setCur1ValueSit2Series() {
+    public void setVolt1ValueSit2Series() {
         try{
-            double current1 = Double.parseDouble(current1Sit2Series.getText());
-            res1Series2.setCurrent(current1);
-            labelCur1Sit2Series.setText(res1Series2.getCurrent()+" A");
-            if (current1 < 0) {
+            double voltage1 = Double.parseDouble(voltage1Sit2Series.getText());
+            res1Series2.setVoltage(voltage1);
+            labelVolt1Sit2Series.setText(voltage1Sit2Series.getText()+" V");
+            if (voltage1 < 0) {
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
@@ -267,12 +263,12 @@ Alert alert = new Alert(Alert.AlertType.NONE);
             alert.showAndWait();
         }
     }
-    public void setCur2ValueSit2Series() {
+    public void setVolt2ValueSit2Series() {
         try{
-            double current1 = Double.parseDouble(current2Sit2Series.getText());
-            res2Series2.setCurrent(current1);
-            labelCur2Sit2Series.setText(res2Series2.getCurrent()+" A");
-            if (current1 < 0) {
+            double voltage2 = Double.parseDouble(voltage2Sit2Series.getText());
+            res2Series2.setVoltage(voltage2);
+            labelVolt2Sit2Series.setText(voltage2Sit2Series.getText()+" V");
+            if (voltage2 < 0) {
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
@@ -288,6 +284,31 @@ Alert alert = new Alert(Alert.AlertType.NONE);
             alert.showAndWait();
         }
     }
+    
+    public void setCurValueSit2Series() {
+        try{
+            double current = Double.parseDouble(currentSit2Series.getText());
+            res1Series2.setCurrent(current);
+            res2Series2.setCurrent(current);
+            labelCurSit2Series.setText(currentSit2Series.getText()+" A");
+            if (current < 0) {
+                throw new IllegalArgumentException(); 
+            }   
+        } catch (NumberFormatException ex){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter a number as current value !");
+            alert.showAndWait();
+
+        } catch (IllegalArgumentException ex){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter a positive number as current value !");
+            alert.showAndWait();
+        }
+    }
+    
+    
 
     
     //SITUATION 3 SERIES INPUTS
@@ -383,12 +404,12 @@ Alert alert = new Alert(Alert.AlertType.NONE);
             alert.showAndWait();
         }
     }
-    public void setCur1ValueSit3Series() {
+    public void setVolt1ValueSit3Series() {
         try{
-            double current1 = Double.parseDouble(current1Sit3Series.getText());
-            res1Series3.setCurrent(current1);
-            labelCur1Sit3Series.setText(res1Series3.getCurrent()+" A");
-            if (current1 < 0) {
+            double voltage1 = Double.parseDouble(voltage1Sit3Series.getText());
+            res1Series3.setVoltage(voltage1);
+            labelVolt1Sit3Series.setText(voltage1Sit3Series.getText()+" V");
+            if (voltage1 < 0) {
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
@@ -405,12 +426,12 @@ Alert alert = new Alert(Alert.AlertType.NONE);
         }
     }
     
-    public void setCur2ValueSit3Series() {
+    public void setVolt2ValueSit3Series() {
         try{
-            double current1 = Double.parseDouble(current2Sit3Series.getText());
-            res2Series3.setCurrent(current1);
-            labelCur2Sit3Series.setText(res2Series3.getCurrent()+" A");
-            if (current1 < 0) {
+            double voltage2 = Double.parseDouble(voltage2Sit3Series.getText());
+            res2Series3.setVoltage(voltage2);
+            labelVolt2Sit3Series.setText(voltage2Sit3Series.getText()+" V");
+            if (voltage2 < 0) {
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
@@ -427,12 +448,12 @@ Alert alert = new Alert(Alert.AlertType.NONE);
         }
     }
     
-    public void setCur3ValueSit3Series() {
+    public void setVolt3ValueSit3Series() {
         try{
-            double current1 = Double.parseDouble(current3Sit3Series.getText());
-            res3Series3.setCurrent(current1);
-            labelCur3Sit3Series.setText(res3Series3.getCurrent()+" A");
-            if (current1 < 0) {
+            double voltage3 = Double.parseDouble(voltage3Sit3Series.getText());
+            res3Series3.setVoltage(voltage3);
+            labelVolt3Sit3Series.setText(voltage3Sit3Series.getText()+" V");
+            if (voltage3 < 0) {
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
@@ -448,7 +469,30 @@ Alert alert = new Alert(Alert.AlertType.NONE);
             alert.showAndWait();
         }
     }
+                
+    public void setCurValueSit3Series() {
+        try{
+            double current = Double.parseDouble(currentSit3Series.getText());
+            res1Series3.setCurrent(current);
+            res2Series3.setCurrent(current);
+            res3Series3.setCurrent(current);
+            labelCurSit3Series.setText(currentSit3Series.getText()+" A");
+            if (current < 0) {
+                throw new IllegalArgumentException(); 
+            }   
+        } catch (NumberFormatException ex){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter a number as current value !");
+            alert.showAndWait();
 
+        } catch (IllegalArgumentException ex){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter a positive number as current value !");
+            alert.showAndWait();
+        }
+    }
 
     //SITUATION 1 PARALLEL INPUTS
 
