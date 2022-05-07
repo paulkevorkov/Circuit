@@ -37,7 +37,8 @@ String path = "file:///C:/Users/Poste/OneDrive - Champlain Regional College/Docu
 @FXML Button SetBatSit3Series, SetRes1Sit3Series, SetRes2Sit3Series, SetRes3Sit3Series, SetVolt1Sit3Series, SetVolt2Sit3Series, SetVolt3Sit3Series;
 @FXML Button SetBatSit1Parallel, SetRes1Sit1Parallel, SetRes2Sit1Parallel, SetCur1Sit1Parallel,SetCur2Sit1Parallel;
 @FXML Button SetBatSit2Parallel, SetRes1Sit2Parallel, SetRes2Sit2Parallel, SetRes3Sit2Parallel,SetCur1Sit2Parallel, SetCur2Sit2Parallel, SetCur3Sit2Parallel;
-@FXML Button CurrentUnknown, ResistorUnknown, VoltageUnknown, Help, SeriesHelp, ParallelHelp;
+@FXML Button CurrentUnknown, ResistorUnknown, VoltageUnknown, Help, SeriesHelp, ParallelHelp, EquivalentResistorParallelHelp1, EquivalentResistorParallelHelp2, EquivalentResistorSeriesHelp1, EquivalentResistorSeriesHelp2;
+@FXML Button ResistorInfo, BatteryInfo;
 
 @FXML TextField batValueSit1Series, resistanceSit1Series, currentSit1Series;
 @FXML TextField batValueSit2Series, resistance1Sit2Series, resistance2Sit2Series, voltage1Sit2Series, voltage2Sit2Series, currentSit2Series;
@@ -50,6 +51,7 @@ String path = "file:///C:/Users/Poste/OneDrive - Champlain Regional College/Docu
 @FXML Label labelBatSit3Series, labelRes1Sit3Series, labelRes2Sit3Series, labelRes3Sit3Series, labelVolt1Sit3Series, labelVolt2Sit3Series, labelVolt3Sit3Series, labelCurSit3Series;
 @FXML Label labelBatSit1Parallel, labelRes1Sit1Parallel, labelRes2Sit1Parallel, labelCur1Sit1Parallel, labelCur2Sit1Parallel;
 @FXML Label labelBatSit2Parallel, labelRes1Sit2Parallel, labelRes2Sit2Parallel, labelRes3Sit2Parallel, labelCur1Sit2Parallel, labelCur2Sit2Parallel, labelCur3Sit2Parallel;
+@FXML Label eqResistanceParallel1, eqResistanceParallel2, eqResistanceSeries1;
 
 
 //CHANGE SCENES
@@ -140,10 +142,10 @@ public void currentUnknown(){
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         GridPane layout = new GridPane();
-        Label infoVoltage = new Label(" To use this program, you must fill out a \n minimum of 2 out of the 3 components; \n resistance, voltage and amps while leaving one of \n them empty. "
-                + " Then you press the calculate \n unknowns  button which will give you \n the value that is missing ");  
-        infoVoltage.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
-        layout.add(infoVoltage, 0,0);
+        Label helpButton = new Label(" To use this program, you must fill out a \n minimum of 2 out of the 3 components; \n resistance, voltage and amps while leaving one of \n them empty. "
+                + "Then you press the calculate \n unknowns  button which will give you \n the value that is missing. ");  
+        helpButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        layout.add(helpButton, 0,0);
         Scene scene = new Scene(layout, 520, 200);  
         stage.setTitle("Help Info");
         stage.setScene(scene);
@@ -153,9 +155,9 @@ public void currentUnknown(){
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         GridPane layout = new GridPane();
-        Label infoVoltage = new Label(" A series circuit is an electric circuit \n in which the  electric passes through \n each circuit element in order");  
-        infoVoltage.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
-        layout.add(infoVoltage, 0,0);
+        Label infoSeries = new Label(" A series circuit is an electric circuit \n in which the  electric passes through \n each circuit element in order. ");  
+        infoSeries.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        layout.add(infoSeries, 0,0);
         Scene scene = new Scene(layout, 400, 100);  
         stage.setTitle("Series Info");
         stage.setScene(scene);
@@ -165,14 +167,92 @@ public void currentUnknown(){
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         GridPane layout = new GridPane();
-        Label infoVoltage = new Label("A parallel circuit comprises branches so \n that the current divides and only part \n of it flows through any branch.");  
-        infoVoltage.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
-        layout.add(infoVoltage, 0,0);
+        Label infoParallel = new Label("A parallel circuit comprises branches so \n that the current divides and only part \n of it flows through any branch. ");  
+        infoParallel.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        layout.add(infoParallel, 0,0);
         Scene scene = new Scene(layout, 400, 100);  
         stage.setTitle("Parallel Info");
         stage.setScene(scene);
         stage.show();
     }
+    public void equivalentResistorParallelHelp1(){
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        GridPane layout = new GridPane();
+        Label infoEquivalentResistor = new Label("The equivalant resistance is the resistance in \nthe entire circuit written as Req \n\n1/Req = 1/R1 + 1/R2");  
+        infoEquivalentResistor.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        layout.add(infoEquivalentResistor, 0,0);
+        Scene scene = new Scene(layout, 550, 150);  
+        stage.setTitle("Equivalent resistor Info");
+        stage.setScene(scene);
+        stage.show();
+    }
+     public void equivalentResistorParallelHelp2(){
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        GridPane layout = new GridPane();
+        Label infoEquivalentResistor = new Label("The equivalant resistance is the resistance in \nthe entire circuit written as Req \n\n1/Req = 1/R1 + 1/R2 + 1/R3");  
+        infoEquivalentResistor.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        layout.add(infoEquivalentResistor, 0,0);
+        Scene scene = new Scene(layout, 400, 100);  
+        stage.setTitle("Equivalent resistor Info");
+        stage.setScene(scene);
+        stage.show();
+    }
+     public void equivalentResistorSeriesHelp1(){
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        GridPane layout = new GridPane();
+        Label infoEquivalentResistor = new Label("The equivalant resistance is the resistance in \nthe entire circuit written as Req \n\nReq = R1 + R2");  
+        infoEquivalentResistor.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        layout.add(infoEquivalentResistor, 0,0);
+        Scene scene = new Scene(layout, 400, 100);  
+        stage.setTitle("Equivalent resistor Info");
+        stage.setScene(scene);
+        stage.show();
+     }
+     public void equivalentResistorSeriesHelp2(){
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        GridPane layout = new GridPane();
+        Label infoEquivalentResistor = new Label("The equivalant resistance is the resistance in \nthe entire circuit written as Req \n\nReq = R1 + R2 + R3");  
+        infoEquivalentResistor.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        layout.add(infoEquivalentResistor, 0,0);
+        Scene scene = new Scene(layout, 400, 100);  
+        stage.setTitle("Equivalent resistor Info");
+        stage.setScene(scene);
+        stage.show();
+     }
+     public void resistorInfo(){
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        GridPane layout = new GridPane();
+        Label infoResistor = new Label("A resistor is an electrical component \nthat limits or regulates the flow of \nelectrical current in an electronic circuit.\n");  
+        infoResistor.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        ImageView image = new ImageView( new Image("file:///C:/Users/Poste/OneDrive - Champlain Regional College/Documents/NetBeansProjects/Circuit/Resources/resistor image.png"));
+        Label infoResistor2 = new Label("https://www.techtarget.com/whatis/definition/resistor ");  
+        layout.add(infoResistor, 0,0);
+        layout.add(image, 0, 1);
+        layout.add(infoResistor2, 0, 2);
+        Scene scene = new Scene(layout, 450, 200);  
+        stage.setTitle("Resistor Info");
+        stage.setScene(scene);
+        stage.show();
+     }
+     public void batteryInfo(){
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        GridPane layout = new GridPane();
+        Label infoBattery = new Label("The battery's role in a circuit is all about \ndoing work and providing energy.");  
+        infoBattery.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        ImageView image = new ImageView( new Image("file:///C:/Users/Poste/OneDrive - Champlain Regional College/Documents/NetBeansProjects/Circuit/Resources/battery image.png"));
+        layout.add(infoBattery, 0,0);
+        layout.add(image, 0, 1);
+        Scene scene = new Scene(layout, 450, 200);  
+        stage.setTitle("Battery Info");
+        stage.setScene(scene);
+        stage.show();
+     }
     
     
     
@@ -1009,8 +1089,6 @@ Alert alert = new Alert(Alert.AlertType.NONE);
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         
-
-  
     }
 
 
