@@ -112,6 +112,7 @@ Alert alert = new Alert(Alert.AlertType.NONE);
     Resistor resSeries1 = new Resistor();
     
     public void setBatValueSit1Series() {
+        
         try{
             double voltage = Double.parseDouble(batValueSit1Series.getText());
             batSeries1.setVoltage(voltage);
@@ -123,7 +124,9 @@ Alert alert = new Alert(Alert.AlertType.NONE);
             }                
         } catch (NumberFormatException ex){
             if (batValueSit1Series.getText().isEmpty()){
-                labelBatSit1Series.setText("VOLTAGE");
+                labelBatSit1Series.setText("VOLTAGE (V)");
+                labelVoltSit1Series.setText("VOLTAGE (V)");
+                
             }else{
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setHeaderText("ERROR");
@@ -207,12 +210,12 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 throw new IllegalArgumentException(); 
             }   
         } catch (NumberFormatException ex){
-            if (currentSit1Series.getText().isEmpty()){
-                labelCurSit1Series.setText(labelCurSit1Series.getId());
+            if (batValueSit2Series.getText().isEmpty()){
+                labelBatSit2Series.setText("VOLTAGE (V)");
             }else{
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setHeaderText("ERROR");
-                alert.setContentText("Please enter a number as current value !");
+                alert.setContentText("Please enter a number as voltage value !");
                 alert.showAndWait();
             }
         } catch (IllegalArgumentException ex){
@@ -580,6 +583,8 @@ Alert alert = new Alert(Alert.AlertType.NONE);
         try{
             double voltage = Double.parseDouble(batValueSit1Parallel.getText());
             batParallel1.setVoltage(voltage);
+            res1Parallel1.setVoltage(voltage);
+            res2Parallel1.setVoltage(voltage);
             labelBatSit1Parallel.setText(batParallel1.getVoltage()+" V");
             if (voltage <= 0) {
                 throw new IllegalArgumentException(); 
@@ -714,6 +719,9 @@ Alert alert = new Alert(Alert.AlertType.NONE);
         try{
             double voltage = Double.parseDouble(batValueSit2Parallel.getText());
             batParallel2.setVoltage(voltage);
+            res1Parallel2.setVoltage(voltage);
+            res2Parallel2.setVoltage(voltage);
+            res3Parallel2.setVoltage(voltage);
             labelBatSit2Parallel.setText(batParallel2.getVoltage()+" V");
             if (voltage <= 0) {
                 throw new IllegalArgumentException(); 
@@ -965,7 +973,8 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 "The resistance value of the resistor is:  " + resSeries1.getResistance() + " Ohm\n"
                 + "The current of the circuit is: " + resSeries1.getCurrent()+" A\n\n"
                 + "By applying Ohm's law (V = IR) we get: " + "\n" 
-                + "Voltage = " + resSeries1.getCurrent() + "*" + resSeries1.getResistance() + " V\n"
+                + "Voltage = Current * Resistance\n"
+                + "Voltage = " + resSeries1.getCurrent() + " A * " + resSeries1.getResistance() + " Ohm\n"
                 + "Voltage = " + resSeries1.getVoltage() + " V"); 
                         
             stage.setTitle("Calculate Voltage");
@@ -975,7 +984,8 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 "The voltage of the battery is:  " + batSeries1.getVoltage() + " V\n"
                 + "The current of the circuit is: " + resSeries1.getCurrent()+" A\n\n"
                 + "By applying Ohm's law (V = IR so R = V/I) we get: " + "\n" 
-                + "Resistance = " + batSeries1.getVoltage() + "/" + resSeries1.getCurrent() + " Ohms\n"
+                + "Resistance = Voltage / Current\n"
+                + "Resistance = " + batSeries1.getVoltage() + " V / " + resSeries1.getCurrent() + " A\n"
                 + "Resistance = " + resSeries1.getResistance() + " Ohms");  
             
             stage.setTitle("Calculate Resistance");
@@ -985,7 +995,8 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                 "The voltage of the battery is :  " + batSeries1.getVoltage() + " V\n"
                 + "The resistance value of the resistor is:  " + resSeries1.getResistance() + " Ohm\n\n"
                 + "By applying Ohm's law (V = IR so I = V/R) we get: " + "\n" 
-                + "Current = " + resSeries1.getVoltage() + "*" + resSeries1.getResistance() + " A\n"
+                + "Current = Voltage / Resistance \n"
+                + "Current = " + resSeries1.getVoltage() + " V * " + resSeries1.getResistance() + " Ohm\n"
                 + "Current = " + resSeries1.getCurrent() + " A");  
             
             stage.setTitle("Calculate Current");
@@ -996,22 +1007,19 @@ Alert alert = new Alert(Alert.AlertType.NONE);
     }
     
     
-    // SITUATION 1 PARALLEL 
+    // SITUATION 1 PARALLEL
+    
     public void handleCalculateSit1Parallel(){
-        
         //if no input
-        if (    batValueSit1Parallel.getText().isEmpty() 
-                && current2Sit1Parallel.getText().isEmpty() 
-                && current1Sit1Parallel.getText().isEmpty() 
-                && resistance1Sit1Parallel.getText().isEmpty()
-                && resistance2Sit1Parallel.getText().isEmpty()){
+       if (batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()
+               && resistance2Sit1Parallel.getText().isEmpty()){
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setHeaderText("ERROR");
             alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
             alert.showAndWait();
        }
-        
-       //if 4 empty sauf 2 resistance et 2 currents       
+       //if 4 empty sauf 2 resistance et 2 currents
+       
        else if ((batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty())||
                (batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) || 
                (batValueSit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()&& current1Sit1Parallel.getText().isEmpty()) ||
@@ -1019,7 +1027,8 @@ Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setHeaderText("ERROR");
             alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
-            alert.showAndWait();  
+            alert.showAndWait();
+  
        }
        
        //if 3 empty
@@ -1031,12 +1040,11 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                (current2Sit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
                (current1Sit1Parallel.getText().isEmpty()&& current2Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
                (current2Sit1Parallel.getText().isEmpty()&& current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty())){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
-            alert.showAndWait();
+                    alert.setAlertType(Alert.AlertType.ERROR);
+                    alert.setHeaderText("ERROR");
+                    alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
+                    alert.showAndWait();
        }
-       
        //if 2 empty
        else if ((batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty())||
                (batValueSit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty()) ||
@@ -1047,10 +1055,10 @@ Alert alert = new Alert(Alert.AlertType.NONE);
                (current1Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()) ||
                (current2Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()))
                {
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
-            alert.showAndWait();
+                    alert.setAlertType(Alert.AlertType.ERROR);
+                    alert.setHeaderText("ERROR");
+                    alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
+                    alert.showAndWait();
        }
        
        //if battery and current missing
@@ -1060,149 +1068,347 @@ Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setContentText("Please enter an input for Battery Voltage or Currents for Resistors 1 and 2");
             alert.showAndWait();
        }
-              
+       
+       
        //if battery and resistors missing
        else if (batValueSit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()
                && resistance2Sit1Parallel.getText().isEmpty()){
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setHeaderText("ERROR");
             alert.setContentText("Please enter an input for Battery Voltage or Resistances 1 and 2");
-            alert.showAndWait();           
+            alert.showAndWait();
+           
        }
+       //if current and resistors missing
        
-       //if current and resistors missing       
        else if (resistance1Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()&& current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty()){           
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setHeaderText("ERROR");
             alert.setContentText("Please enter an input for Currents for Resistors 1 and 2 or Resistances 1 and 2");
-            alert.showAndWait();       
-        }
-        
+            alert.showAndWait();
+       
+    }
+       
+       //RESULT IF HAVE VOLTAGE AND CURRENT
+       else if ((current1Sit1Parallel.getText().isEmpty()==false)&& (current2Sit1Parallel.getText().isEmpty()==false) && (batValueSit1Parallel.getText().isEmpty()==false)){
+           double resistance1 = (batParallel1.getVoltage() / res1Parallel1.getCurrent());
+           double resistance2 = (batParallel1.getVoltage() / res2Parallel1.getCurrent());
+           
+           labelRes1Sit1Parallel.setText(resistance1+" Ohm");
+           labelRes2Sit1Parallel.setText(resistance2+" Ohm");
+       }
+       
+       //RESULT IF HAVE VOLTAGE AND RESISTANCE
+       else if ((resistance1Sit1Parallel.getText().isEmpty()==false)&& (resistance2Sit1Parallel.getText().isEmpty()==false) && (batValueSit1Parallel.getText().isEmpty()==false)){
+           double current1 = (batParallel1.getVoltage() / res1Parallel1.getResistance());
+           double current2 = (batParallel1.getVoltage() / res2Parallel1.getResistance());
+           
+           labelCur1Sit1Parallel.setText(current1+" A");
+           labelCur2Sit1Parallel.setText(current2+" A");
+       }
+       
+       //RESULT IF HAVE RESISTANCE AND CURRENT
+       else if ((current1Sit1Parallel.getText().isEmpty()==false)&& (current2Sit1Parallel.getText().isEmpty()==false) && (resistance1Sit1Parallel.getText().isEmpty()==false)&& (resistance2Sit1Parallel.getText().isEmpty()==false)){
+           double voltage1 = (res1Parallel1.getResistance() * res1Parallel1.getCurrent());
+           double voltage2 = (res2Parallel1.getResistance() * res2Parallel1.getCurrent());
+           
+           double voltageTotal = voltage1 + voltage2;
+           labelBatSit1Parallel.setText(voltageTotal+" V");
+       }
     }
     
-    // SITUATION 1 PARALLEL 
-    public void handleCalculateSit1Series(){
-        
-        //if no input
-        if (    batValueSit2Series.getText().isEmpty() 
-                && voltage1Sit2Series.getText().isEmpty() 
-                && voltage2Sit2Series.getText().isEmpty() 
-                && resistance1Sit2Series.getText().isEmpty()
-                && resistance2Sit2Series.getText().isEmpty()
-                && currentSit2Series.getText().isEmpty()){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
-            alert.showAndWait();
-       }
-        
-       //if 4 empty        
-       else if ((batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty())||
-               (batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) || 
-               (batValueSit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()&& current1Sit1Parallel.getText().isEmpty()) ||
-               (batValueSit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()&&current2Sit1Parallel.getText().isEmpty())){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
-            alert.showAndWait();  
-       }
-       
-    /*
-batValueSit2Series, resistance1Sit2Series, resistance2Sit2Series, voltage1Sit2Series, voltage2Sit2Series, currentSit2Series;
-    */
-       
-       //if 3 empty
-       else if ((batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
-               (batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
-               (batValueSit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
-               (batValueSit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
-               (current1Sit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
-               (current2Sit1Parallel.getText().isEmpty()&& resistance1Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
-               (current1Sit1Parallel.getText().isEmpty()&& current2Sit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
-               (current2Sit1Parallel.getText().isEmpty()&& current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty())){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
-            alert.showAndWait();
-       }
-       
-       //if 2 empty
-       else if ((batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty())||
-               (batValueSit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty()) ||
-               (batValueSit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
-               (batValueSit1Parallel.getText().isEmpty() && resistance2Sit1Parallel.getText().isEmpty()) ||
-               (current1Sit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()) ||
-               (resistance1Sit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty()) ||
-               (current1Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()) ||
-               (current2Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()))
-               {
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
-            alert.showAndWait();
-       }
-       
-       //if battery and current missing
-       else if (batValueSit1Parallel.getText().isEmpty() && current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty()){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter an input for Battery Voltage or Currents for Resistors 1 and 2");
-            alert.showAndWait();
-       }
-              
-       //if battery and resistors missing
-       else if (batValueSit1Parallel.getText().isEmpty() && resistance1Sit1Parallel.getText().isEmpty()
-               && resistance2Sit1Parallel.getText().isEmpty()){
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter an input for Battery Voltage or Resistances 1 and 2");
-            alert.showAndWait();           
-       }
-       
-       //if current and resistors missing       
-       else if (resistance1Sit1Parallel.getText().isEmpty()&& resistance2Sit1Parallel.getText().isEmpty()&& current2Sit1Parallel.getText().isEmpty() && current1Sit1Parallel.getText().isEmpty()){           
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Please enter an input for Currents for Resistors 1 and 2 or Resistances 1 and 2");
-            alert.showAndWait();       
-        }
-        
-    }
-    /*
-batValueSit2Series, resistance1Sit2Series, resistance2Sit2Series, voltage1Sit2Series, voltage2Sit2Series, currentSit2Series;
-    */
-    
-    public void Info(){
-        /*Stage stage = new Stage();
+    public void handleStepsSit1Parallel(){
+        Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-
         GridPane layout = new GridPane();
+        Label steps = new Label();
+        steps.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        layout.add(steps, 0, 0);
+        
+    //RESULT IF HAVE VOLTAGE AND CURRENT
+           if ((current1Sit1Parallel.getText().isEmpty()==false)&& (current2Sit1Parallel.getText().isEmpty()==false) && (batValueSit1Parallel.getText().isEmpty()==false)){
+               steps.setText(" In order to find the resistance of each resistor,\n"
+                       + " you have to use Ohm's Law (V = I*R)\n\n"
+                       + " V = "+batParallel1.getVoltage()+" V\n"
+                       + " I1 = "+res1Parallel1.getCurrent()+" A\n"
+                       + " I2 = "+res2Parallel1.getCurrent()+" A\n\n"
+                       + " R1 = V/I1 = "+(batParallel1.getVoltage() / res1Parallel1.getCurrent())+" Ohm\n"
+                       + " R2 = V/I2 = "+(batParallel1.getVoltage() / res2Parallel1.getCurrent())+" Ohm\n");     
+       }
+       
+       //RESULT IF HAVE VOLTAGE AND RESISTANCE
+       else if ((resistance1Sit1Parallel.getText().isEmpty()==false)&& (resistance2Sit1Parallel.getText().isEmpty()==false) && (batValueSit1Parallel.getText().isEmpty()==false)){
+           steps.setText(" In order to find the current of each resistor,\n"
+                       + " you have to use Ohm's Law (V = I*R)\n\n"
+                       + " V = "+batParallel1.getVoltage()+" V\n"
+                       + " R1 = "+res1Parallel1.getResistance()+" Ohm\n"
+                       + " R2 = "+res2Parallel1.getResistance()+" Ohm\n\n"
+                       + " I1 = V/R1 = "+(batParallel1.getVoltage() / res1Parallel1.getResistance())+" A\n"
+                       + " I2 = V/R2 = "+(batParallel1.getVoltage() / res2Parallel1.getResistance())+" A\n");
+           
+       }
+       
+       //RESULT IF HAVE RESISTANCE AND CURRENT
+       else if ((current1Sit1Parallel.getText().isEmpty()==false)&& (current2Sit1Parallel.getText().isEmpty()==false) && (resistance1Sit1Parallel.getText().isEmpty()==false)&& (resistance2Sit1Parallel.getText().isEmpty()==false)){
+           steps.setText(" In order to find the voltage,\n"
+                       + " you have to use Ohm's Law (V = I*R)\n\n"
+                       + " I1 = "+res1Parallel1.getCurrent()+" A\n"
+                       + " I2 = "+res2Parallel1.getCurrent()+" A\n"
+                       + " R1 = "+res1Parallel1.getResistance()+" Ohm\n"
+                       + " R2 = "+res2Parallel1.getResistance()+" Ohm\n\n"
+                       + " V1 = I1*R1 = "+(res1Parallel1.getResistance() * res1Parallel1.getCurrent())+" V\n"
+                       + " V2 = I2*R2 = "+(res2Parallel1.getResistance() * res2Parallel1.getCurrent())+" V\n"
+                       + " V = V1+V2 = "+((res1Parallel1.getResistance() * res1Parallel1.getCurrent())+(res2Parallel1.getResistance() * res2Parallel1.getCurrent()))+" V\n");
+           
 
-
-        Label infoDrag = new Label(" Press the mouse's left button on the \n Circuit Element and move in order to drag.\n ");
-        Label infoRotate = new Label(" Double click the mouse's left button\n on the Circuit Element to rotate it.\n ");
-        Label infoChange = new Label(" Press the mouse's right button on the \n Circuit Element to be able to change its properties.\n ");
-
-        infoDrag.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
-        infoRotate.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
-        infoChange.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
-
-        layout.add(infoDrag, 0,0);
-        layout.add(infoRotate, 0,1);
-        layout.add(infoChange, 0,2);
-
-        Scene scene = new Scene(layout, 520, 300);  
-
-        stage.setTitle("Info");
+       }
+        Scene scene = new Scene(layout, 520, 400);  
+        stage.setTitle("Steps");
         stage.setScene(scene);
-        stage.show();*/
+        stage.show();
+        
+    }
+    
+    
+    // SITUATION 2 SERIES 
+    static int sit2Series;
+    Resistor rEqSit2Series = new Resistor();
+    public void handleCalculateSit2Series(){
+        
+        TextField[] textFieldList = {batValueSit2Series, resistance1Sit2Series, resistance2Sit2Series, voltage1Sit2Series, voltage2Sit2Series, currentSit2Series};
+        int nbEmpty = 0;
+        
+        for(TextField field: textFieldList){
+            if (field.getText().isEmpty()){
+                nbEmpty++;
+            }
+        }
+        
+        //if 6 or 5 or 4 empty
+        if (nbEmpty > 3){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter inputs for 2 categories (battery voltage, resitances or currents)");
+            alert.showAndWait();
+        }
+        
+        else if (nbEmpty == 3){            
+            // RESULT IF HAVE BATTERY, R1 and R2
+            if (!batValueSit2Series.getText().isEmpty() && !resistance1Sit2Series.getText().isEmpty() && !resistance2Sit2Series.getText().isEmpty()){
+                sit2Series = 0;
+
+                // 1. Calculate Req (Req = R1+R2)
+                rEqSit2Series.setVoltage(batSeries2.getVoltage());
+                rEqSit2Series.setResistance(res1Series2.getResistance()+res2Series2.getResistance());
+                
+                // 2. Calculate Current (I = V/Req)
+                rEqSit2Series.setCurrent(rEqSit2Series.getVoltage()/rEqSit2Series.getResistance());
+                res1Series2.setCurrent(rEqSit2Series.getCurrent());
+                res2Series2.setCurrent(rEqSit2Series.getCurrent());
+                
+                // 3. Calculate V1 & V2 (V1 = I*R1,  V2 = I*R2)
+                res1Series2.setVoltage(res1Series2.getCurrent()/res1Series2.getResistance());
+                res2Series2.setVoltage(res2Series2.getCurrent()/res2Series2.getResistance());
+                
+                //set Req, V1, V2, Current labels
+                //labelReqSit2Series.setText(String.format("%.3f", rEqSit2Series.getResistance())+" Ohm");
+                labelVolt1Sit2Series.setText(String.format("%.3f", res1Series2.getVoltage())+" V");
+                labelVolt2Sit2Series.setText(String.format("%.3f", res2Series2.getVoltage())+" V");
+                labelCurSit2Series.setText(String.format("%.3f", res1Series2.getCurrent())+" A");
+            }
+                
+            // RESULT IF HAVE CURRENT,R1 and R1
+            else if (!currentSit2Series.getText().isEmpty()&& !resistance1Sit2Series.getText().isEmpty() && !resistance2Sit2Series.getText().isEmpty()){
+                sit2Series = 1;
+                
+                // 1. Calculate Req (Req = R1+R2)                
+                rEqSit2Series.setVoltage(batSeries2.getVoltage());
+                rEqSit2Series.setResistance(res1Series2.getResistance()+res2Series2.getResistance());
+                
+                // 2. Calculate Voltage (V = I*Req)
+                rEqSit2Series.setVoltage(rEqSit2Series.getCurrent()*rEqSit2Series.getResistance());
+                batSeries2.setVoltage(rEqSit2Series.getCurrent()*rEqSit2Series.getResistance());
+                
+                // 3. Calculate V1 & V2 (V1 = I*R1,  V2 = I*R2)
+                res1Series2.setVoltage(res1Series2.getCurrent()/res1Series2.getResistance());
+                res2Series2.setVoltage(res2Series2.getCurrent()/res2Series2.getResistance());
+                
+                //set Req, V1, V2, batteryVoltage labels
+                //labelReqSit2Series.setText(String.format("%.3f", rEqSit2Series.getResistance())+" Ohm");
+                labelVolt1Sit2Series.setText(String.format("%.3f", res1Series2.getVoltage())+" V");
+                labelVolt2Sit2Series.setText(String.format("%.3f", res2Series2.getVoltage())+" V");
+                labelBatSit2Series.setText(String.format("%.3f", batSeries2.getVoltage())+" V");
+            }
+                
+       
+            // RESULT IF HAVE CURRENT, V1 and V2
+            else if (!currentSit2Series.getText().isEmpty()&& !voltage1Sit2Series.getText().isEmpty() && !voltage2Sit2Series.getText().isEmpty()){
+                sit2Series = 2;
+
+                
+                //1. Calculate batteryVoltage (Vbat = V1+V2)
+                batSeries2.setVoltage(res1Series2.getVoltage()+res2Series2.getVoltage());
+                
+                //2. Calculate R1 & R1 (R1 = V1/I, R2 = V2/I)
+                res1Series2.setResistance(res1Series2.getVoltage()/res1Series2.getCurrent());
+                res2Series2.setResistance(res2Series2.getVoltage()/res2Series2.getCurrent());
+                
+                //3. Calculate Req
+                rEqSit2Series.setResistance(resSeries1.getResistance()+res2Series2.getResistance());
+                
+                // set labels: batteryVoltage, R1, R2                
+                //labelReqSit2Series.setText(String.format("%.3f", rEqSit2Series.getResistance())+" Ohm");
+                labelBatSit2Series.setText(String.format("%.3f", batSeries2.getVoltage())+" V");
+                labelRes1Sit2Series.setText(String.format("%.3f", res1Series2.getResistance())+" Ohm");                
+                labelRes2Sit2Series.setText(String.format("%.3f", res2Series2.getResistance())+" Ohm");
+            }
+                
+            else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter inputs for only 2 of the 4 categories (battery voltage, resistances, voltage of resistors or current)");
+                alert.showAndWait();
+            } 
+        }
+        
+        else if (nbEmpty == 2){
+            
+            // RESULT IF HAVE R1, R2, V1, V2
+            if (batValueSit2Series.getText().isEmpty()&& currentSit2Series.getText().isEmpty()){
+                sit2Series = 3;
+
+                //1. calculate current (i = v/r)
+                double i1 = res1Series2.getVoltage()/res1Series2.getResistance();
+                double i2 = res2Series2.getVoltage()/res2Series2.getResistance();
+                if (i1 != i2){
+                    alert.setAlertType(Alert.AlertType.ERROR);
+                    alert.setHeaderText("ERROR");
+                    alert.setContentText("Please enter imputs for resistances and voltages such that the current stays consistent");
+                    alert.showAndWait();
+                }else{
+                    res1Series2.setCurrent(i2);
+                    res2Series2.setCurrent(i2);
+                }
+                
+                //2. calculate batteryVoltage
+                batSeries2.setVoltage(res1Series2.getVoltage()+res2Series2.getVoltage());
+                
+                // set labels : batteryVoltage, current
+                //labelReqSit2Series.setText(String.format("%.3f", rEqSit2Series.getResistance())+" Ohm");
+                labelBatSit2Series.setText(String.format("%.3f", batSeries2.getVoltage())+" V");
+                labelCurSit2Series.setText(String.format("%.3f", res1Series2.getCurrent())+" A");
+            }
+            else{
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Please enter inputs for only 2 of the 4 categories (battery voltage, resistances, voltage of resistors or current)");
+                alert.showAndWait();
+            }
+             
+        }
+        
+        else{
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Please enter inputs for only 2 of the 4 categories (battery voltage, resistances, voltage of resistors or current)");
+            alert.showAndWait();
+        }
+       
+    }
+    
+    public void handleStepsSit2Series(){
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        GridPane layout = new GridPane();
+        Label steps = new Label();
+        steps.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 20));
+        layout.add(steps, 0, 0);
+        
+        //STEPS IF HAVE BATTERY, R1 and R2
+        if (sit2Series == 0){
+            steps.setText(" The unkown values are the Current and the Voltages of the resistors\n\n"
+                    + "Step 1: find the equivalent resistor to the ciruit (Req)\n"      
+                    + "Req = Resistance1 + Resistance2\n"
+                    + "Req = " + String.format("%.3f", res1Series2.getResistance()) +" Ohm +"+ String.format("%.3f",res1Series2.getResistance())+" Ohm\n"
+                    + "Req = " + String.format("%.3f", rEqSit2Series.getResistance())+ " Ohm\n\n"
+                    + "Step 2: find the current of the circuit using Ohm's law (V = I*R)\n"
+                    + "I = batteryVoltage / equivalentResistance\n"
+                    + "I = "+String.format("%.3f", batSeries2.getVoltage())+" V / "+ String.format("%.3f", rEqSit2Series.getResistance())+" Ohm\n"
+                    + "I = "+String.format("%.3f", res1Series2.getCurrent())+" A\n\n"
+                    + "Step 3: find the voltages of the resistances using Ohm's law (V=I*R)\n"
+                    + "Voltage1 = Current * Resistance1\n"
+                    + "Voltage1 = " + String.format("%.3f", res1Series2.getCurrent())+" A * " + String.format("%.3f", res1Series2.getResistance())+" Ohm\n"
+                    + "Voltage1 = "+String.format("%.3f", res1Series2.getVoltage())+ "V\n"
+                    + "Voltage2 = Current * Resistance2\n"                    
+                    + "Voltage2 = " + String.format("%.3f", res2Series2.getCurrent())+" A * " + String.format("%.3f", res2Series2.getResistance())+" Ohm\n"
+                    + "Voltage2 = "+String.format("%.3f", res2Series2.getVoltage())+" V");
+       }
+       
+       //STEPS IF HAVE CURRENT,R1 and R1
+       else if (sit2Series == 1){
+            steps.setText(" The unkown values are the Battery Voltage and the Voltages of the Resistors\n\n"
+                    + "Step 1: find the equivalent resistor to the ciruit (Req)\n"      
+                    + "Req = Resistance1 + Resistance2\n"
+                    + "Req = " + String.format("%.3f", res1Series2.getResistance()) +" Ohm +"+ String.format("%.3f", res1Series2.getResistance())+" Ohm\n"
+                    + "Req = " + String.format("%.3f", rEqSit2Series.getResistance())+ " Ohm\n\n"
+                    + "Step 2: find the Battery Voltage using Ohm's law (V = I*R)\n"
+                    + "batteryVoltage = circuitCurrent * equivalentResistance\n"
+                    + "batteryVoltage = "+String.format("%.3f", rEqSit2Series.getCurrent())+" A * "+ String.format("%.3f", rEqSit2Series.getResistance())+" Ohm\n"
+                    + "batteryVoltage = "+String.format("%.3f", batSeries2.getVoltage())+" V\n\n"
+                    + "Step 3: find the voltages of the resistances using Ohm's law (V=I*R)\n"
+                    + "Voltage1 = Current * Resistance1\n"
+                    + "Voltage1 = " + String.format("%.3f", res1Series2.getCurrent())+" A * " + String.format("%.3f",res1Series2.getResistance())+" Ohm\n"
+                    + "Voltage1 = "+String.format("%.3f", res1Series2.getVoltage())+ " V\n"
+                    + "Voltage2 = Current * Resistance2\n"                    
+                    + "Voltage2 = " + String.format("%.3f", res2Series2.getCurrent())+" A * " + String.format("%.3f", res2Series2.getResistance())+" Ohm\n"
+                    + "Voltage2 = "+String.format("%.3f", res2Series2.getVoltage())+" V");
+           
+       }
+       
+       //STEPS IF HAVE CURRENT, V1 and V2
+       else if (sit2Series == 2){
+            steps.setText(" The unknown values are the Battery Voltage and the Resistances of the Resistors\n\n"                   
+                    + "**The sum of the voltages of resistors in series = battery voltage**"
+                    + "Step 1: find the battery voltage using property of Resistors in Series\n"
+                    + "batteryVoltage = voltage1 + voltage2\n"
+                    + "batteryVoltage = "+String.format("%.3f", res1Series2.getVoltage())+" V + "+ String.format("%.3f", res2Series2.getVoltage())+" V\n"
+                    + "batteryVoltage = "+String.format("%.3f", batSeries2.getVoltage())+" V\n\n"
+                    + "Step 2: find the resistances of the resistances using Ohm's law (V=I*R)\n"
+                    + "Resistance1 = Voltage1 / circuitCurrent\n"
+                    + "Resistance1 = " + String.format("%.3f", res1Series2.getVoltage())+" V / " + String.format("%.3f", res1Series2.getCurrent())+" A\n"
+                    + "Resistance1 = "+ String.format("%.3f", res1Series2.getResistance())+ "Ohm\n"
+                    + "Resistance2 = Current * Resistance2\n"                    
+                    + "Resistance2 = " + String.format("%.3f", res2Series2.getVoltage())+" V / " + String.format("%.3f", res2Series2.getCurrent())+" A\n"
+                    + "Resistance2 = "+String.format("%.3f", res2Series2.getResistance())+" Ohm");
+                   }
+       
+       // STEPS IF HAVE R1, R2, V1, V2
+        else if (sit2Series == 3){
+            steps.setText(" The unknown values are the Battery Voltage and the Circuit Current\n"
+                    + "**The sum of the voltages of resistors in series = battery voltage**"
+                    + "Step 1: find the battery voltage using property of Resistors in Series\n"
+                    + "batteryVoltage = voltage1 + voltage2\n"
+                    + "batteryVoltage = "+String.format("%.3f", res1Series2.getVoltage())+" V + "+ String.format("%.3f", res2Series2.getVoltage())+" V\n"
+                    + "batteryVoltage = "+String.format("%.3f", batSeries2.getVoltage())+" V\n\n"
+                    + "Step 2: find the Equivalent Resistor (Req)\n"
+                    + "Req = Resistance1 + Resistance2\n"
+                    + "Req = " + String.format("%.3f", res1Series2.getVoltage()) +" Ohm +"+ String.format("%.3f", res1Series2.getVoltage())+" Ohm\n"
+                    + "Req = " + String.format("%.3f", rEqSit2Series.getVoltage())+ " Ohm\n\n"
+                    + "Step 3: find the Circuit Current using Ohm's law (V=I*R"
+                    + "I = batteryVoltage / equivalentResistance\n"
+                    + "I = "+String.format("%.3f", batSeries2.getVoltage())+" V / "+ String.format("%.3f", rEqSit2Series.getResistance())+" Ohm\n"
+                    + "I = "+String.format("%.3f", res1Series2.getCurrent())+" A");  
+        }
+        Scene scene = new Scene(layout, 800, 600);  
+        stage.setTitle("Steps");
+        stage.setScene(scene);
+        stage.show();
+        
     }
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-         
-
-  
+           
     }
 
 
