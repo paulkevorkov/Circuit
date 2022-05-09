@@ -31,7 +31,10 @@
                         <Font name="Mongolian Baiti" size="12.0" />
                      </font>
                   </Button>
-                  <Button layoutX="32.0" layoutY="361.0" mnemonicParsing="false" text="Need Help?" />
+                  <Button fx:id="Help" layoutX="12.0" layoutY="366.0" mnemonicParsing="false" onAction="#helpButton" text="Need Help?" textFill="RED">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
                   <Label layoutX="9.0" layoutY="188.0" prefHeight="22.0" prefWidth="71.0" text="Resistance 2 " />
                   <TextField fx:id="resistance2Sit1Parallel" layoutX="6.0" layoutY="210.0" prefHeight="15.0" prefWidth="76.0" />
                   <Button fx:id="SetRes2Sit1Parallel" layoutX="78.0" layoutY="210.0" mnemonicParsing="false" onAction="#setRes2ValueSit1Parallel" prefHeight="25.0" prefWidth="31.0" text="✅" textFill="#00ff15">
@@ -59,18 +62,18 @@
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Text layoutX="255.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARALLEL: SITUATION 1">
+                  <Text layoutX="220.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARALLEL: 2 RESISTORS">
                      <font>
                         <Font name="Arial" size="22.0" />
                      </font>
                   </Text>
                   <Button fx:id="GoMenu" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToMenu" text="← Go Back" />
-                  <ImageView fx:id="resistor2" fitHeight="60.0" fitWidth="82.0" layoutX="302.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="resistor2" fitHeight="60.0" fitWidth="82.0" layoutX="302.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resistor%20image.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="resistor21" fitHeight="60.0" fitWidth="82.0" layoutX="303.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="resistor21" fitHeight="60.0" fitWidth="82.0" layoutX="304.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resistor%20image.png" />
                      </image>
@@ -80,7 +83,7 @@
                         <Image url="@../battery%20image.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="wire10" fitHeight="5.0" fitWidth="82.0" layoutX="221.0" layoutY="370.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="wire10" fitHeight="5.0" fitWidth="82.0" layoutX="221.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../wire%20image.png" />
                      </image>
@@ -90,7 +93,7 @@
                         <Image url="@../wire%20image.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="wire1011" fitHeight="5.0" fitWidth="82.0" layoutX="222.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="wire1011" fitHeight="5.0" fitWidth="82.0" layoutX="223.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../wire%20image.png" />
                      </image>
@@ -100,22 +103,22 @@
                         <Image url="@../wire%20image.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="wire101111" fitHeight="5.0" fitWidth="82.0" layoutX="425.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                  <ImageView fx:id="wire101111" fitHeight="5.0" fitWidth="82.0" layoutX="425.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
                         <Image url="@../wire%20image.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="labelBatSit1Parallel" layoutX="324.0" layoutY="77.0" text="10 V">
+                  <Label fx:id="labelBatSit1Parallel" layoutX="297.0" layoutY="77.0" text="VOLTAGE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelRes1Sit1Parallel" layoutX="318.0" layoutY="179.0" text="RES1">
+                  <Label fx:id="labelRes1Sit1Parallel" layoutX="284.0" layoutY="190.0" text="RESISTANCE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelRes2Sit1Parallel" layoutX="322.0" layoutY="315.0" text="RES2">
+                  <Label fx:id="labelRes2Sit1Parallel" layoutX="284.0" layoutY="313.0" text="RESISTANCE ">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -125,12 +128,12 @@
                         <Image url="@../wire%20image.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="wire10111111" fitHeight="5.0" fitWidth="82.0" layoutX="180.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                  <ImageView fx:id="wire10111111" fitHeight="5.0" fitWidth="82.0" layoutX="180.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
                         <Image url="@../wire%20image.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="wire10111112" fitHeight="5.0" fitWidth="82.0" layoutX="383.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="wire10111112" fitHeight="5.0" fitWidth="82.0" layoutX="384.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../wire%20image.png" />
                      </image>
@@ -140,32 +143,53 @@
                         <Image url="@../wire%20image.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="wire1011113" fitHeight="5.0" fitWidth="82.0" layoutX="384.0" layoutY="370.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="wire1011113" fitHeight="5.0" fitWidth="82.0" layoutX="384.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../wire%20image.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="wire1011114" fitHeight="5.0" fitWidth="82.0" layoutX="425.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                  <ImageView fx:id="wire1011114" fitHeight="5.0" fitWidth="82.0" layoutX="425.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
                         <Image url="@../wire%20image.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="labelCur1Sit1Parallel" layoutX="313.0" layoutY="263.0" text="AMP1">
+                  <Label fx:id="labelCur1Sit1Parallel" layoutX="287.0" layoutY="220.0" text="CURRENT">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelCur2Sit1Parallel" layoutX="313.0" layoutY="397.0" text="AMP2">
+                  <Label fx:id="labelCur2Sit1Parallel" layoutX="286.0" layoutY="341.0" text="CURRENT ">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button layoutX="32.0" layoutY="479.0" mnemonicParsing="false" text="Voltage Unkown?" />
-                  <Button layoutX="30.0" layoutY="441.0" mnemonicParsing="false" text="Resistance unknown?" />
-                  <Button layoutX="30.0" layoutY="407.0" mnemonicParsing="false" text="Current unknown?" />
-                  <Button layoutX="282.0" layoutY="467.0" mnemonicParsing="false" text="Calculate Unknowns" />
-                  <Button layoutX="285.0" layoutY="504.0" mnemonicParsing="false" text="Steps" />
-                  <ImageView fx:id="wire101111111" fitHeight="5.0" fitWidth="82.0" layoutX="180.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                  <Button fx:id="VoltageUnknown" layoutX="32.0" layoutY="479.0" mnemonicParsing="false" onAction="#voltageUnknown" text="Voltage Unkown?" />
+                  <Button fx:id="ResistorUnknown" layoutX="30.0" layoutY="441.0" mnemonicParsing="false" onAction="#resistorUnknown" text="Resistance unknown?" />
+                  <Button fx:id="CurrentUnknown" layoutX="30.0" layoutY="407.0" mnemonicParsing="false" onAction="#currentUnknown" text="Current unknown?" />
+                  <Button layoutX="282.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleCalculateSit1Parallel" text="Calculate Unknowns" />
+                  <Button layoutX="285.0" layoutY="504.0" mnemonicParsing="false" onAction="#handleStepsSit1Parallel" text="Steps" />
+                  <ImageView fx:id="wire101111111" fitHeight="5.0" fitWidth="82.0" layoutX="180.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                     <image>
+                        <Image url="@../wire%20image.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="551.0" layoutY="300.0" text="Equivalent Resistor">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelReqSit1Parallel" layoutX="606.0" layoutY="333.0" text="... Ohms">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="EquivalentResistorParallelHelp1" layoutX="514.0" layoutY="303.0" mnemonicParsing="false" onAction="#equivalentResistorParallelHelp1" prefHeight="25.0" prefWidth="26.0" text="?" textFill="RED" />
+                  <ImageView fx:id="wire101111112" fitHeight="5.0" fitWidth="82.0" layoutX="425.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                     <image>
+                        <Image url="@../wire%20image.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wire1011111121" fitHeight="5.0" fitWidth="82.0" layoutX="180.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
                         <Image url="@../wire%20image.png" />
                      </image>
