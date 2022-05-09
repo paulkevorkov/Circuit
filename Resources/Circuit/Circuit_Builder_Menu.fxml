@@ -1,41 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Circuit.Controller">
    <children>
-      <Text layoutX="38.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INTERACTIVE CIRCUIT BUILDER" textAlignment="CENTER" wrappingWidth="524.81396484375">
+      <Text layoutX="38.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INTERACTIVE CIRCUIT SOLVER" textAlignment="CENTER" wrappingWidth="524.81396484375">
          <font>
             <Font name="Arial Black" size="32.0" />
          </font>
       </Text>
-      <Text layoutX="132.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHOSE YOUR SITUATION" wrappingWidth="336.81396484375">
+      <Text layoutX="118.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHOOSE YOUR SITUATION" wrappingWidth="363.81396484375">
          <font>
             <Font name="Arial" size="27.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SERIES">
+      <Text layoutX="38.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SERIES SITUATION">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="38.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARALLEL SITUATION">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Button fx:id="GoSeries1" layoutX="208.0" layoutY="197.0" mnemonicParsing="false" onAction="#switchToSeries1" text="Single Resistor" />
+      <Button fx:id="GoParallel1" layoutX="208.0" layoutY="277.0" mnemonicParsing="false" onAction="#switchToParallel1" text="2 Resistors" />
+      <Button fx:id="GoSeries2" layoutX="208.0" layoutY="237.0" mnemonicParsing="false" onAction="#switchToSeries2" text="2 Resistors" />
+      <Button fx:id="GoSeries3" layoutX="288.0" layoutY="237.0" mnemonicParsing="false" onAction="#switchToSeries3" text="3 Resistors" />
+      <Button fx:id="GoParallel2" layoutX="288.0" layoutY="277.0" mnemonicParsing="false" onAction="#switchToParallel2" text="3 Resistors" />
+      <Button fx:id="SeriesHelp" layoutX="14.0" layoutY="237.0" mnemonicParsing="false" onAction="#seriesHelp" text="?" textFill="RED" />
+      <Button fx:id="ParallelHelp" layoutX="14.0" layoutY="277.0" mnemonicParsing="false" onAction="#parallelHelp" text="?" textFill="RED" />
+      <Label layoutX="514.0" layoutY="196.0" text="Resistors">
          <font>
             <Font size="18.0" />
          </font>
-      </Text>
-      <Text layoutX="14.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARALLEL">
+      </Label>
+      <Label layoutX="521.0" layoutY="241.0" text="Battery">
          <font>
             <Font size="18.0" />
          </font>
-      </Text>
-      <Text layoutX="14.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EXTRA">
+      </Label>
+      <Label layoutX="549.0" layoutY="303.0" />
+      <Button fx:id="ResistorInfo" layoutX="482.0" layoutY="197.0" mnemonicParsing="false" onAction="#resistorInfo" prefHeight="25.0" prefWidth="23.0" text="?" textFill="RED" />
+      <Button fx:id="BatteryInfo" layoutX="482.0" layoutY="242.0" mnemonicParsing="false" onAction="#batteryInfo" prefHeight="25.0" prefWidth="23.0" text="?" textFill="RED" />
+      <Text layoutX="38.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BASIC SITUATION">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font>
       </Text>
-      <Button fx:id="GoSeries1" layoutX="93.0" layoutY="188.0" mnemonicParsing="false" onAction="#switchToSeries1" text="1" />
-      <Button fx:id="GoParallel1" layoutX="105.0" layoutY="242.0" mnemonicParsing="false" onAction="#switchToParallel1" text="1" />
-      <Button fx:id="GoSeries2" layoutX="121.0" layoutY="188.0" mnemonicParsing="false" onAction="#switchToSeries2" text="2" />
-      <Button fx:id="GoSeries3" layoutX="151.0" layoutY="188.0" mnemonicParsing="false" onAction="#switchToSeries3" text="3" />
-      <Button fx:id="GoParallel2" layoutX="133.0" layoutY="242.0" mnemonicParsing="false" onAction="#switchToParallel2" text="2" />
+      <Button fx:id="BasicHelp" layoutX="14.0" layoutY="197.0" mnemonicParsing="false" onAction="#basicHelp" text="?" textFill="RED" />
    </children>
 </AnchorPane>
